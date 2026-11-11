@@ -79,7 +79,7 @@ Implemented against the supplied CODEX_MASTER_PROMPT.md, in numbered phase order
 
 ## Git and deployment
 
-The configured origin is https://github.com/gmanojisaac/familytree.git. Repository-local commit identity is configured using the GitHub owner's no-reply address. Publication to GitHub and Vercel was requested on 11 November 2026 and is in progress. Live database, SMTP and private media configuration must be verified before private production features are enabled.
+The configured origin is https://github.com/gmanojisaac/familytree.git. Repository-local commit identity is configured using the GitHub owner's no-reply address. The application is pushed to GitHub main and linked to the familytree Vercel project. A free Neon production database and encrypted private Vercel Blob store are connected. The owner deferred email configuration; production sign-in remains closed. See docs/DEPLOYMENT_STATUS.md and Vercel for the latest production build state.
 
 ## Final validation
 
@@ -93,3 +93,7 @@ The configured origin is https://github.com/gmanojisaac/familytree.git. Reposito
 - Connection recovery was additionally tested: a new bilateral approval can re-establish a previously disputed assertion while the old disputed request and audit remain.
 - Development-only upstream notice: Three.js Clock deprecation is emitted by the current rendering library; no application runtime error was observed.
 - Live SMTP/S3/scanner delivery and actual human review were not tested without operator credentials.
+
+## Deployment update
+
+The deployment update adds a production private Blob adapter, direct PostgreSQL migration URL support, automatic reviewed-catalogue seeding, and an honest email-setup screen. Lint, typecheck, 19 unit/database tests and 8 browser flows pass. A real connected-store write/read/delete and unauthenticated-access denial check passed. Credentials and temporary environment files were not committed.

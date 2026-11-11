@@ -83,7 +83,7 @@ The production build intentionally does not enable demo authentication. If your 
 - Hashed, signed, one-use, expiring invitations; bilateral affected-adult and steward connection approval; endpoint-only cross-tree grants, decline, dispute, unlink and audits.
 - Strict server-owned wishes/replies, shared occasion opt-in, database-backed rate limits, mute/DND and guardian routing. No open text messaging.
 - Guardian-associated child profiles; server-enforced restricted mode and per-child consent controls and per-recording guardian approvals.
-- Actual MediaRecorder recording and file fallback, preview/retry/pause, encrypted private storage, immutable consent audiences, authenticated manual playback, transcripts, stewardship, independent memorial review, access freeze and withdrawal/deletion.
+- Actual MediaRecorder recording and file fallback, preview/retry/pause, encrypted private local/S3/Vercel Blob storage, immutable consent audiences, authenticated manual playback, transcripts, stewardship, independent memorial review, access freeze and withdrawal/deletion.
 - Own-data export, erasure requests, sole-member tree dissolution, moderation references and fixed-template enable/disable controls.
 
 ## Project map
@@ -104,6 +104,6 @@ docs/                    Security, operations, acceptance mapping and deployment
 
 ## Launch boundaries
 
-Live SMTP, private S3, a malware-scanning gateway, independent human verification/moderation operations, retention/backups and jurisdiction-specific legal review require operator setup. They are deliberately not faked. English is implemented; catalogue IDs and locale fields allow later translation. Optional profile photo upload, automated transcript generation, voice synthesis and external notification delivery are not present. All avatars are supplied neutral placeholders.
+Live SMTP, private object storage, a malware-scanning gateway, independent human verification/moderation operations, retention/backups and jurisdiction-specific legal review require operator setup. They are deliberately not faked. English is implemented; catalogue IDs and locale fields allow later translation. Optional profile photo upload, automated transcript generation, voice synthesis and external notification delivery are not present. All avatars are supplied neutral placeholders.
 
 Read [SECURITY](docs/SECURITY.md), [operations](docs/OPERATIONS.md), [acceptance tests](docs/ACCEPTANCE.md), [implementation status](IMPLEMENTATION_STATUS.md) and the beginner [Vercel deployment guide](docs/DEPLOY_VERCEL.md). No live deployment or purchased domain has been created.

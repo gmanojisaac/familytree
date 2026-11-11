@@ -38,6 +38,15 @@ test("fixed wishes can only receive reviewed replies from the recipient",async({
  expect((await action(arun,"reply",{greetingId:wish.id,templateId:"thank_you",text:"custom reply"})).status()).toBe(400);
  expect((await action(arun,"reply",{greetingId:wish.id,templateId:"thank_you"})).status()).toBe(200);await arun.close();
 });
+test("private invitation survives sign-in and accepts only once",async({browser})=>{
+ const owner=await browser.newContext();await login(owner);
+ const invitation=await action(owner,"invite",{treeId:"oak",email:"outsider@example.invalid"});expect(invitation.status()).toBe(200);const {url}=await invitation.json();
+ const relative=await browser.newContext(),page=await relative.newPage();await page.goto(url);await page.getByRole("link",{name:"Sign in with my invited email"}).click();await page.getByRole("button",{name:"Outside account",exact:true}).click();
+ await expect(page.getByRole("button",{name:"Accept private invitation",exact:true})).toBeVisible();await page.getByLabel(/I agree to join this private grove/).check();await page.getByRole("button",{name:"Accept private invitation",exact:true}).click();
+ await expect(page.getByRole("heading",{name:/Welcome home, Alex/})).toBeVisible();
+ const repeat=await action(relative,"accept-invite",{token:new URL(url).searchParams.get("token"),consent:true});expect(repeat.status()).toBe(400);
+ await owner.close();await relative.close();
+});
 test("browser microphone recording can be previewed and saved privately",async({page,context})=>{
  await login(context);await page.goto("/grove/voice");await page.getByRole("button",{name:"My recording studio",exact:true}).click();
  await page.getByLabel(/I am an authorized adult and freely consent/).check();await page.getByRole("button",{name:"Start recording",exact:true}).click();

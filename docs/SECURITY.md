@@ -23,11 +23,11 @@ This is a working MVP requiring an independent security, privacy and child-safet
 - Every clip points to an immutable versioned consent record and normalized audience rows for NOW and AFTER. Future use needs advance opt-in and an adult steward. No API expands a saved consent's audience.
 - A death report alone does not activate memorial mode. A different moderator must independently confirm review. Steward disputes freeze playback. Reopening requires documented operator review and may never expand advance consent.
 - Authorizations are checked on each authenticated audio GET; there are no public media paths or permanent bearer playback links. URLs are not authorization. Current family access, audience, consent, memorial review, guardian policy, per-clip guardian approval, mute and hide choices all apply.
-- Audio bytes are encrypted with AES-256-GCM before local or private S3 storage; the decryption key remains server-side. Local filenames and S3 keys are opaque random values, never original filenames or names.
+- Audio bytes are encrypted with AES-256-GCM before local, private Vercel Blob, or private S3 storage; the decryption key remains server-side. Local filenames and S3 keys are opaque random values, never original filenames or names.
 - The server reads bounded multipart data, validates container signatures, parses actual audio duration, caps duration at 90 seconds and size at 3 MB, and requires a clean verdict from a configured private scanner in production. WebM with unreadable duration is rejected; the browser's WAV conversion is the fallback.
 - Playback is user-initiated, authenticated, no-store, inline and audited. Transcript content is rendered as escaped text. Native controls and an explicit Stop action are available.
 - Withdrawal immediately marks consent withdrawn and the clip deleted before removing stored bytes. No further authorized GET can fetch it. Copies already played or captured on a recipient's device cannot be technically recalled; the download UI restriction is not DRM. Operators must reflect deletion in backups within the agreed retention window.
-- S3 public access must be blocked at the provider. The application performs no external speech processing. Scanner operators must agree to confidentiality, retention and no-training terms.
+- The Vercel Blob store uses private access, with no public object response path. S3 public access must be blocked at the provider when that adapter is used. The application performs no external speech processing. Scanner operators must agree to confidentiality, retention and no-training terms.
 
 ## Threat model and residual risks
 

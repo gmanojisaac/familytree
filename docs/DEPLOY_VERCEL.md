@@ -37,7 +37,9 @@ Only the reviewed template catalogue is seeded in production. Never run `setup:d
 
 ## 3. Provision private media and scanning
 
-Create a private S3-compatible bucket. Block public access at the bucket/provider level; grant an application key only the necessary GetObject/PutObject/DeleteObject rights for that bucket. Do not enable a public object website or unauthenticated CDN for the recordings.
+On Vercel, a private Vercel Blob store is also supported with MEDIA_STORAGE=blob and the connected BLOB_STORE_ID or BLOB_READ_WRITE_TOKEN. Both adapters store only AES-GCM-encrypted bytes and use authenticated application playback. The current project uses this private Blob option.
+
+For S3 instead, create a private S3-compatible bucket. Block public access at the bucket/provider level; grant an application key only the necessary GetObject/PutObject/DeleteObject rights for that bucket. Do not enable a public object website or unauthenticated CDN for the recordings.
 
 The server encrypts recordings with AES-256-GCM before storage, then authenticates and authorizes every playback request. Use a separate encryption key per environment, back it up securely, and document rotation. Losing the key makes existing recordings unrecoverable.
 
@@ -77,9 +79,10 @@ In Vercel Project Settings → Environment Variables, add the actual values belo
 | BETTER_AUTH_SECRET | Fresh random secret, at least 32 characters |
 | DEMO_MODE | false |
 | MEDIA_ENCRYPTION_KEY | Fresh random 32-byte key encoded as 64 hex characters |
-| MEDIA_STORAGE | s3 |
+| MEDIA_STORAGE | blob for the connected private Vercel store, or s3 |
 | MAX_AUDIO_BYTES | 3145728 or a smaller limit |
 | MAX_AUDIO_SECONDS | 90 or a smaller limit |
+| BLOB_STORE_ID | Connected private Blob store identifier when using blob |
 | S3_REGION | Provider's actual region |
 | S3_BUCKET | Private bucket name |
 | S3_ENDPOINT | Actual endpoint for an S3-compatible provider; omit for standard AWS if appropriate |

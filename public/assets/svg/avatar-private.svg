@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Private person placeholder">
+  <circle cx="128" cy="128" r="121" fill="#EFF3F3" stroke="#B9C9C8" stroke-width="7"/>
+  <circle cx="115" cy="101" r="43" fill="#B9C9C8"/><path d="M37 214c10-45 41-69 78-69 41 0 70 24 79 69" fill="#7A9B99"/>
+  <rect x="145" y="138" width="73" height="62" rx="14" fill="#216C67"/>
+  <path d="M163 138v-10c0-27 38-27 38 0v10" fill="none" stroke="#216C67" stroke-width="12"/>
+  <circle cx="182" cy="168" r="6" fill="#FFF9EB"/>
+</svg>

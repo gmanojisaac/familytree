@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Congratulations trophy">
+  <circle cx="64" cy="64" r="59" fill="#FFF2E5"/>
+  <path d="M44 26h40v36c0 20-10 31-20 31S44 82 44 62Z" fill="#EFC76C" stroke="#216C67" stroke-width="5"/>
+  <path d="M44 39H29v15c0 11 8 17 19 17M84 39h15v15c0 11-8 17-19 17" fill="none" stroke="#216C67" stroke-width="6"/>
+  <path d="M64 93v11M44 107h40" stroke="#216C67" stroke-width="7" stroke-linecap="round"/>
+  <path d="m64 42 5 9 10 2-7 7 2 10-10-5-10 5 2-10-7-7 10-2z" fill="#FFF9EB"/>
+</svg>

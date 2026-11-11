@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Guardian protection">
+  <circle cx="64" cy="64" r="59" fill="#E6F7EC"/>
+  <path d="M64 17 103 31v29c0 25-15 42-39 52-24-10-39-27-39-52V31Z" fill="#54B995" stroke="#216C67" stroke-width="6"/>
+  <path d="M64 85C45 72 42 62 47 54c5-8 14-7 17 0 5-7 15-8 20 0 5 8 2 18-20 31Z" fill="#FFF9EB"/>
+</svg>

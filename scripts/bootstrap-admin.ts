@@ -1,0 +1,11 @@
+import "dotenv/config";
+import {PrismaClient} from "../src/generated/prisma/client";
+import {PrismaPg} from "@prisma/adapter-pg";
+const email=process.argv[2];if(!email)throw new Error("Usage: npm run admin:bootstrap -- verified-owner@example.com");
+const db=new PrismaClient({adapter:new PrismaPg({connectionString:process.env.DATABASE_URL!},{schema:new URL(process.env.DATABASE_URL!).searchParams.get("schema")??"public"})});
+const a=await db.account.findUnique({where:{email:email.toLowerCase()}});
+if(!a?.emailVerified)throw new Error("First verify this account's email through a magic link.");
+await db.account.update({where:{id:a.id},data:{role:"MODERATOR",adultVerified:true}});
+await db.auditLog.create({data:{actorAccountId:a.id,action:"operator-admin-bootstrap",subjectId:a.id}});
+console.log("Verified account granted moderator access. Complete human adult verification before granting other accounts.");
+await db.$disconnect();

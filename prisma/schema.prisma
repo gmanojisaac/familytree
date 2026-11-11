@@ -1,0 +1,399 @@
+generator client {
+  provider = "prisma-client"
+  output = "../src/generated/prisma"
+}
+datasource db {
+  provider = "postgresql"
+}
+enum AccountRole {
+  ADULT
+  MODERATOR
+}
+enum MemberRole {
+  MEMBER
+  STEWARD
+}
+enum EdgeKind {
+  PARENT_CHILD
+  PARTNER
+  GUARDIAN
+}
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  DECLINED
+  REVOKED
+  DISPUTED
+}
+enum DateVisibility {
+  PRIVATE
+  MONTH_DAY
+  FULL
+}
+enum VoicePeriod {
+  NOW
+  AFTER
+}
+model Account {
+  id String @id
+  name String
+  email String @unique
+  emailVerified Boolean @default(false)
+  image String?
+  role AccountRole @default(ADULT)
+  adultVerified Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sessions Session[]
+  identities AuthIdentity[]
+  person Person?
+  memberships TreeMembership[]
+  guardianConsents GuardianConsent[]
+}
+model Session {
+  id String @id
+  expiresAt DateTime
+  token String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId String
+  activeChildId String?
+  user Account @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+}
+model AuthIdentity {
+  id String @id
+  accountId String
+  providerId String
+  userId String
+  accessToken String?
+  refreshToken String?
+  idToken String?
+  accessTokenExpiresAt DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope String?
+  password String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user Account @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+  @@unique([providerId, accountId])
+}
+model Verification {
+  id String @id
+  identifier String
+  value String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([identifier])
+}
+model RateLimit {
+  id String @id @default(cuid())
+  key String @unique
+  count Int
+  lastRequest BigInt
+}
+model Person {
+  id String @id @default(cuid())
+  displayName String
+  accountId String? @unique
+  account Account? @relation(fields: [accountId], references: [id], onDelete: SetNull)
+  isMinor Boolean @default(false)
+  deceased Boolean @default(false)
+  birthDate DateTime?
+  generation Int @default(1)
+  color String @default("#DDEEE2")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  privacy PrivacyPreference?
+  visibility PersonTreeVisibility[]
+  outgoing RelationshipEdge[] @relation("source")
+  incoming RelationshipEdge[] @relation("target")
+  occasions Occasion[]
+  guardianConsents GuardianConsent[]
+  clips VoiceClip[]
+  notification NotificationPreference?
+}
+model FamilyTree {
+  id String @id @default(cuid())
+  name String
+  inviteCode String @unique @default(cuid())
+  createdAt DateTime @default(now())
+  memberships TreeMembership[]
+  visibility PersonTreeVisibility[]
+  edges RelationshipEdge[]
+  invitations Invitation[]
+}
+model TreeMembership {
+  id String @id @default(cuid())
+  accountId String
+  treeId String
+  role MemberRole @default(MEMBER)
+  createdAt DateTime @default(now())
+  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  tree FamilyTree @relation(fields: [treeId], references: [id], onDelete: Cascade)
+  @@unique([accountId, treeId])
+  @@index([treeId])
+}
+model PersonTreeVisibility {
+  id String @id @default(cuid())
+  personId String
+  treeId String
+  sourceLinkId String?
+  person Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+  tree FamilyTree @relation(fields: [treeId], references: [id], onDelete: Cascade)
+  sourceLink TreeLinkRequest? @relation(fields: [sourceLinkId], references: [id], onDelete: Cascade)
+  @@unique([personId, treeId])
+  @@index([treeId, sourceLinkId])
+}
+model PrivacyPreference {
+  personId String @id
+  dateVisibility DateVisibility @default(PRIVATE)
+  showPhoto Boolean @default(false)
+  allowLinked Boolean @default(false)
+  person Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+}
+model RelationshipEdge {
+  id String @id @default(cuid())
+  treeId String
+  sourceId String
+  targetId String
+  kind EdgeKind
+  subtype String @default("biological")
+  assertedBy String
+  status ReviewStatus @default(APPROVED)
+  sourceLinkId String?
+  visibility String @default("members")
+  startAt DateTime?
+  endAt DateTime?
+  evidence String @default("Family assertion; no identity documents collected")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  source Person @relation("source", fields: [sourceId], references: [id], onDelete: Cascade)
+  target Person @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
+  tree FamilyTree @relation(fields: [treeId], references: [id], onDelete: Cascade)
+  sourceLink TreeLinkRequest? @relation(fields: [sourceLinkId], references: [id], onDelete: Cascade)
+  @@unique([sourceId, targetId, kind])
+  @@index([treeId, status])
+  @@index([targetId, kind])
+}
+model TreeLinkRequest {
+  id String @id @default(cuid())
+  fromTreeId String
+  toTreeId String
+  fromPersonId String
+  toPersonId String
+  kind EdgeKind
+  subtype String
+  requestedBy String
+  status ReviewStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  approvals RelationshipApproval[]
+  grants PersonTreeVisibility[]
+  edges RelationshipEdge[]
+  @@index([fromTreeId, status])
+  @@index([toTreeId, status])
+}
+model RelationshipApproval {
+  id String @id @default(cuid())
+  linkId String
+  treeId String
+  accountId String
+  approved Boolean
+  createdAt DateTime @default(now())
+  link TreeLinkRequest @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  @@unique([linkId, treeId])
+}
+model Invitation {
+  id String @id @default(cuid())
+  treeId String
+  personId String?
+  email String
+  tokenHash String @unique
+  createdBy String
+  expiresAt DateTime
+  consumedAt DateTime?
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+  tree FamilyTree @relation(fields: [treeId], references: [id], onDelete: Cascade)
+  @@index([treeId])
+}
+model GuardianConsent {
+  id String @id @default(cuid())
+  guardianAccountId String
+  childPersonId String
+  explore Boolean @default(true)
+  greetings Boolean @default(false)
+  voice Boolean @default(false)
+  createdAt DateTime @default(now())
+  guardian Account @relation(fields: [guardianAccountId], references: [id], onDelete: Cascade)
+  child Person @relation(fields: [childPersonId], references: [id], onDelete: Cascade)
+  @@unique([guardianAccountId, childPersonId])
+}
+model Occasion {
+  id String @id @default(cuid())
+  personId String
+  kind String
+  month Int
+  day Int
+  enabled Boolean @default(true)
+  person Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+  greetings Greeting[]
+  @@unique([personId, kind])
+}
+model GreetingTemplate {
+  id String @id
+  occasion String
+  text String
+  allowedReplies String[]
+  enabled Boolean @default(true)
+  locale String @default("en")
+  greetings Greeting[]
+}
+model GreetingReplyTemplate {
+  id String @id
+  text String
+  enabled Boolean @default(true)
+  replies GreetingReply[]
+}
+model Greeting {
+  id String @id @default(cuid())
+  senderId String
+  recipientId String
+  templateId String
+  occasionId String
+  createdAt DateTime @default(now())
+  template GreetingTemplate @relation(fields: [templateId], references: [id])
+  occasion Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  reply GreetingReply?
+  @@index([senderId, createdAt])
+  @@index([recipientId, createdAt])
+}
+model GreetingReply {
+  id String @id @default(cuid())
+  greetingId String @unique
+  templateId String
+  createdAt DateTime @default(now())
+  greeting Greeting @relation(fields: [greetingId], references: [id], onDelete: Cascade)
+  template GreetingReplyTemplate @relation(fields: [templateId], references: [id])
+}
+model NotificationPreference {
+  personId String @id
+  doNotDisturb Boolean @default(false)
+  hideLegacy Boolean @default(false)
+  mutedPersonIds String[] @default([])
+  person Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+}
+model MediaAsset {
+  id String @id @default(cuid())
+  storageKey String @unique
+  mime String
+  bytes Int
+  sha256 String
+  createdAt DateTime @default(now())
+  clip VoiceClip?
+}
+model VoiceConsent {
+  id String @id @default(cuid())
+  ownerPersonId String
+  version String @default("2026-11-v1")
+  syntheticSpeechProhibited Boolean @default(true)
+  allowDownload Boolean @default(false)
+  allowMemorial Boolean @default(false)
+  withdrawnAt DateTime?
+  createdAt DateTime @default(now())
+  audience VoiceAudience[]
+  clips VoiceClip[]
+}
+model VoiceAudience {
+  id String @id @default(cuid())
+  consentId String
+  personId String
+  period VoicePeriod
+  consent VoiceConsent @relation(fields: [consentId], references: [id], onDelete: Cascade)
+  @@unique([consentId, personId, period])
+}
+model VoiceClip {
+  id String @id @default(cuid())
+  ownerPersonId String
+  promptKey String
+  transcript String @default("")
+  duration Float
+  consentRecordId String
+  mediaId String @unique
+  status String @default("ACTIVE")
+  createdAt DateTime @default(now())
+  owner Person @relation(fields: [ownerPersonId], references: [id], onDelete: Cascade)
+  consent VoiceConsent @relation(fields: [consentRecordId], references: [id])
+  media MediaAsset @relation(fields: [mediaId], references: [id])
+  playbackAudits VoicePlaybackAudit[]
+  @@index([ownerPersonId, promptKey, status])
+}
+model LegacySteward {
+  id String @id @default(cuid())
+  ownerPersonId String @unique
+  stewardPersonId String
+  backupPersonId String?
+  createdAt DateTime @default(now())
+}
+model MemorialStatusReview {
+  id String @id @default(cuid())
+  ownerPersonId String
+  requestedBy String
+  status ReviewStatus @default(PENDING)
+  reviewedBy String?
+  evidenceCode String
+  frozen Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([ownerPersonId, status])
+}
+model VoicePlaybackAudit {
+  id String @id @default(cuid())
+  clipId String
+  viewerPersonId String
+  createdAt DateTime @default(now())
+  clip VoiceClip @relation(fields: [clipId], references: [id], onDelete: Cascade)
+}
+model ModerationReport {
+  id String @id @default(cuid())
+  reporterAccountId String
+  category String
+  subjectId String
+  status String @default("OPEN")
+  createdAt DateTime @default(now())
+}
+model ErasureRequest {
+  id String @id @default(cuid())
+  accountId String
+  status String @default("PENDING")
+  createdAt DateTime @default(now())
+}
+model AuditLog {
+  id String @id @default(cuid())
+  actorAccountId String
+  action String
+  subjectId String
+  createdAt DateTime @default(now())
+  @@index([actorAccountId, createdAt])
+}
+model ActionLimit {
+  key String @id
+  window DateTime
+  count Int @default(0)
+}
+
+model GuardianVoiceApproval {
+ id String @id @default(cuid())
+ guardianAccountId String
+ childPersonId String
+ clipId String
+ approved Boolean @default(false)
+ createdAt DateTime @default(now())
+ @@unique([guardianAccountId, childPersonId, clipId])
+ @@index([childPersonId, clipId, approved], map: "guardian_voice_lookup")
+}

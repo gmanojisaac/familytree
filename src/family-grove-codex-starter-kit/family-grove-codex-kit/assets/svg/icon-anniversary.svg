@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Anniversary rings">
+  <circle cx="64" cy="64" r="59" fill="#F1EDFF"/>
+  <circle cx="49" cy="75" r="26" fill="none" stroke="#EFC76C" stroke-width="11"/><circle cx="79" cy="75" r="26" fill="none" stroke="#216C67" stroke-width="11"/>
+  <path d="m46 34 10-14 10 14-10 11z" fill="#8ECAF0"/>
+</svg>

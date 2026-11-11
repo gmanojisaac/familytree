@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Celebration lantern">
+  <circle cx="64" cy="64" r="59" fill="#FFF2E5"/>
+  <path d="M64 7v22" stroke="#216C67" stroke-width="6"/>
+  <path d="M45 33h38l9 14v33L83 94H45l-9-14V47Z" fill="#F7A37A" stroke="#216C67" stroke-width="5"/>
+  <path d="M64 34v60M37 63h54" stroke="#FFF9EB" stroke-width="6"/>
+  <path d="M52 98v14M76 98v14" stroke="#EFC76C" stroke-width="6" stroke-linecap="round"/>
+</svg>

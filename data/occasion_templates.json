@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "locale": "en",
+  "policy": {
+    "freeTextAllowed": false,
+    "customAudioMessagesAllowed": false,
+    "serverEnforcedAllowlist": true,
+    "childReceivingRequiresGuardianApproval": true
+  },
+  "greetings": [
+    { "id": "birthday_01", "occasion": "birthday", "text": "Wishing you a beautiful birthday filled with happiness!", "allowedReplies": ["thank_you", "heart", "smile"] },
+    { "id": "birthday_02", "occasion": "birthday", "text": "Happy birthday! May this year bring you joy and good health.", "allowedReplies": ["thank_you", "heart"] },
+    { "id": "anniversary_01", "occasion": "anniversary", "text": "Wishing you both a lovely anniversary!", "allowedReplies": ["thank_you", "heart"] },
+    { "id": "wedding_01", "occasion": "wedding", "text": "Congratulations on your wedding. Wishing you a wonderful life together!", "allowedReplies": ["thank_you", "heart"] },
+    { "id": "baby_01", "occasion": "new_baby", "text": "Welcome to the family, little one! Wishing everyone good health and joy.", "allowedReplies": ["thank_you", "heart"] },
+    { "id": "festival_01", "occasion": "festival", "text": "Warm wishes to you and your family on this special occasion!", "allowedReplies": ["thank_you", "same_to_you", "heart"] },
+    { "id": "graduation_01", "occasion": "graduation", "text": "Congratulations on your graduation! Keep learning and shining.", "allowedReplies": ["thank_you", "smile"] },
+    { "id": "congrats_01", "occasion": "congratulations", "text": "Congratulations! We are celebrating this happy moment with you.", "allowedReplies": ["thank_you", "heart"] },
+    { "id": "well_01", "occasion": "get_well", "text": "Thinking of you and wishing you strength and a gentle recovery.", "allowedReplies": ["thank_you", "heart"] },
+    { "id": "thanks_01", "occasion": "thank_you", "text": "Thank you for the kindness you shared with our family.", "allowedReplies": ["you_are_welcome", "heart"] },
+    { "id": "memory_01", "occasion": "remembrance", "text": "Holding our happy family memories close today.", "allowedReplies": ["heart", "thank_you"] },
+    { "id": "blessing_01", "occasion": "general", "text": "Sending love and good wishes to our family.", "allowedReplies": ["thank_you", "same_to_you", "heart"] }
+  ],
+  "replies": [
+    { "id": "thank_you", "text": "Thank you so much!" },
+    { "id": "same_to_you", "text": "Warm wishes to you too!" },
+    { "id": "you_are_welcome", "text": "You're very welcome!" },
+    { "id": "heart", "text": "Sending love!" },
+    { "id": "smile", "text": "This made me smile!" }
+  ],
+  "legacyVoicePromptKeys": [
+    "birthday_greeting", "anniversary_blessing", "new_baby_welcome",
+    "graduation_advice", "family_story", "festival_wish",
+    "encouragement", "remembrance_message"
+  ]
+}

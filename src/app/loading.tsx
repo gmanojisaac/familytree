@@ -1,0 +1,1 @@
+export default function Loading(){return <main id="main" className="center-state"><img src="/assets/svg/app-favicon.svg" alt="" width="64" height="64"/><h1>Finding your roots?</h1><p>Your private grove is loading.</p></main>;}

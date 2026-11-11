@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="New baby cradle">
+  <circle cx="64" cy="64" r="59" fill="#E6F7EC"/>
+  <path d="M25 57h78c0 25-13 42-39 42S25 82 25 57Z" fill="#BCA9EB"/>
+  <path d="M25 58c10-25 34-35 56-22 11 6 18 13 22 22" fill="#F7C5A9"/>
+  <path d="M24 58h80" stroke="#216C67" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="48" cy="104" r="6" fill="#216C67"/><circle cx="81" cy="104" r="6" fill="#216C67"/>
+</svg>

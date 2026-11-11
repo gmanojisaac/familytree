@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Get well flower">
+  <circle cx="64" cy="64" r="59" fill="#E6F7EC"/>
+  <path d="M64 74v39M64 95c-13-18-27-15-29-2 13 7 22 9 29 2M64 103c10-17 25-18 30-7-11 10-22 11-30 7" fill="#54B995" stroke="#216C67" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="64" cy="47" r="19" fill="#EFC76C"/>
+  <circle cx="64" cy="23" r="15" fill="#F7A37A"/><circle cx="42" cy="37" r="15" fill="#F7A37A"/><circle cx="49" cy="63" r="15" fill="#F7A37A"/><circle cx="79" cy="63" r="15" fill="#F7A37A"/><circle cx="86" cy="37" r="15" fill="#F7A37A"/><circle cx="64" cy="47" r="13" fill="#EFC76C"/>
+</svg>

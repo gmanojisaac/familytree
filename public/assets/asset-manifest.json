@@ -1,0 +1,30 @@
+{
+  "brand": "Family Grove",
+  "version": 1,
+  "note": "These files supply website art and UI icons. Render the live interactive family graph with Three.js and authorized database records.",
+  "images": [
+    { "path": "png/hero-family-tree.png", "type": "raster", "usage": "Public landing hero and marketing preview", "alt": "An inviting flowering family tree with empty glowing portrait frames", "decorative": true },
+    { "path": "png/logo-family-grove.png", "type": "raster", "usage": "Brand mark, onboarding, app launch graphic", "alt": "Colorful 3D family tree with heart-shaped trunk", "decorative": false },
+    { "path": "png/empty-sapling.png", "type": "raster", "usage": "Create-your-first-tree empty state", "alt": "Small sapling with empty portrait medallions", "decorative": true },
+    { "path": "png/linked-family-trees.png", "type": "raster", "usage": "Connect two family trees onboarding", "alt": "Two small family trees joined by a gentle bridge", "decorative": true },
+    { "path": "png/occasion-celebration.png", "type": "raster", "usage": "Preset greeting cards and celebration screen banner", "alt": "Festive decorations around a family tree", "decorative": true },
+    { "path": "svg/app-favicon.svg", "type": "vector", "usage": "Browser favicon and fallback brand mark", "alt": "Family Grove tree icon" },
+    { "path": "svg/avatar-adult.svg", "type": "vector", "usage": "Adult portrait placeholder with no real face", "alt": "Neutral adult profile placeholder" },
+    { "path": "svg/avatar-child.svg", "type": "vector", "usage": "Guardian-managed child profile placeholder", "alt": "Neutral child profile placeholder" },
+    { "path": "svg/avatar-private.svg", "type": "vector", "usage": "Hidden person / privacy protected relative", "alt": "Private person" },
+    { "path": "svg/node-frame.svg", "type": "vector", "usage": "UI portrait frame, not a 3D mesh", "alt": "Decorative oval portrait frame" },
+    { "path": "svg/icon-birthday.svg", "type": "vector", "usage": "Preset birthday occasion", "alt": "Birthday cake" },
+    { "path": "svg/icon-anniversary.svg", "type": "vector", "usage": "Preset anniversary occasion", "alt": "Anniversary rings" },
+    { "path": "svg/icon-wedding.svg", "type": "vector", "usage": "Preset wedding occasion", "alt": "Wedding hearts" },
+    { "path": "svg/icon-new-baby.svg", "type": "vector", "usage": "Preset new baby occasion", "alt": "Baby cradle" },
+    { "path": "svg/icon-festival.svg", "type": "vector", "usage": "Preset festival occasion", "alt": "Celebration lantern" },
+    { "path": "svg/icon-graduation.svg", "type": "vector", "usage": "Preset graduation occasion", "alt": "Graduation cap" },
+    { "path": "svg/icon-congratulations.svg", "type": "vector", "usage": "Preset congratulations", "alt": "Trophy" },
+    { "path": "svg/icon-get-well.svg", "type": "vector", "usage": "Preset get-well occasion", "alt": "Flower" },
+    { "path": "svg/icon-remembrance.svg", "type": "vector", "usage": "Memorial and remembrance", "alt": "Remembrance candle" },
+    { "path": "svg/icon-voice.svg", "type": "vector", "usage": "Record actual voice consent flow", "alt": "Microphone" },
+    { "path": "svg/icon-legacy-play.svg", "type": "vector", "usage": "Play original voice recording", "alt": "Play recording" },
+    { "path": "svg/icon-tree-link.svg", "type": "vector", "usage": "Connection approval flow", "alt": "Connected family trees" },
+    { "path": "svg/icon-guardian.svg", "type": "vector", "usage": "Child protection and guardian approval", "alt": "Guardian shield" }
+  ]
+}

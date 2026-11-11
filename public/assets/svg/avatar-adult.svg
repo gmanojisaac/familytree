@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Neutral adult profile placeholder">
+  <circle cx="128" cy="128" r="121" fill="#E6F7EC" stroke="#B6DAC9" stroke-width="7"/>
+  <circle cx="128" cy="102" r="46" fill="#88C9B2"/>
+  <path d="M48 213c9-47 39-70 80-70s71 23 80 70" fill="#216C67"/>
+  <circle cx="202" cy="53" r="20" fill="#FFF9EB" stroke="#EFC76C" stroke-width="5"/><path d="m194 54 6 6 11-13" fill="none" stroke="#216C67" stroke-width="5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,70 @@
+{
+  "name": "family-grove",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A private, consent-based family forest",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "start": "next start",
+    "build": "prisma generate && next build",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:local": "prisma dev --name familygrove --detach --port 51213 --db-port 51214 --shadow-db-port 51215",
+    "setup:demo": "node scripts/setup-demo.mjs",
+    "admin:bootstrap": "tsx scripts/bootstrap-admin.ts",
+    "db:catalogue": "tsx scripts/seed-catalogue.ts",
+    "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1166.0",
+    "@better-auth/prisma-adapter": "^1.7.20",
+    "@prisma/adapter-pg": "^7.10.1",
+    "@prisma/client": "^7.10.1",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "better-auth": "^1.7.20",
+    "lucide-react": "^1.71.0",
+    "music-metadata": "^12.4.0",
+    "next": "^16.4.6",
+    "nodemailer": "^10.5.0",
+    "pg": "^8.23.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^26.6.6",
+    "@types/nodemailer": "^8.0.2",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.187.0",
+    "dotenv": "^18.0.10",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.6",
+    "postcss": "^8.5.32",
+    "prisma": "^7.10.1",
+    "tailwindcss": "^4.3.5",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.0"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.7"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Family Grove tree icon">
+  <rect width="128" height="128" rx="29" fill="#E6F7EC"/>
+  <path d="M63 104V65M63 80C44 81 36 70 29 59M63 72C82 72 88 60 99 48" fill="none" stroke="#216C67" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="33" cy="45" r="22" fill="#54B995"/><circle cx="60" cy="32" r="24" fill="#A0DDB3"/><circle cx="91" cy="41" r="23" fill="#69B6B2"/>
+  <path d="M63 72c-16-10-18-20-9-25 6-3 10 1 11 5 4-7 12-7 15-2 5 8-5 16-17 22z" fill="#F7A37A"/>
+  <path d="M39 106h49" stroke="#216C67" stroke-width="8" stroke-linecap="round"/>
+</svg>

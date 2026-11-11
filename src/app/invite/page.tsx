@@ -1,0 +1,3 @@
+import {InviteForm} from "@/components/invite-form";
+export const metadata={title:"A private family invitation",robots:{index:false,follow:false}};
+export default async function Invite({searchParams}:{searchParams:Promise<{token?:string}>}){const {token}=await searchParams;return <main id="main" className="auth-page"><section className="auth-card"><div><span className="eyebrow">A PLACE IN THE FAMILY</span><h1>You’re invited.<br/><em>Come grow with us.</em></h1><p>Sign in with the exact invited email. Acceptance adds your profile and membership to the inviting grove; existing groves remain separate.</p><InviteForm token={token??""}/></div><img src="/assets/png/linked-family-trees.png" alt="Two family groves joined by a bridge"/></section></main>;}

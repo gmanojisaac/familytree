@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "description": "Fixed, owner-recorded voice prompts for a consent-based interactive archive. No generated speech or free-text messages.",
+  "defaultMaxSeconds": 90,
+  "prompts": [
+    { "key": "birthday_greeting", "label": "Play a birthday blessing", "category": "occasion", "childAccess": "guardian_approved" },
+    { "key": "anniversary_blessing", "label": "Play an anniversary blessing", "category": "occasion", "childAccess": "guardian_approved" },
+    { "key": "new_baby_welcome", "label": "Welcome a new baby", "category": "occasion", "childAccess": "guardian_approved" },
+    { "key": "graduation_advice", "label": "Advice for a big achievement", "category": "occasion", "childAccess": "guardian_approved" },
+    { "key": "festival_wish", "label": "Share a festival wish", "category": "occasion", "childAccess": "guardian_approved" },
+    { "key": "family_story", "label": "Tell me a happy family memory", "category": "memory", "childAccess": "guardian_approved" },
+    { "key": "childhood_memory", "label": "What was your childhood like?", "category": "memory", "childAccess": "guardian_approved" },
+    { "key": "family_tradition", "label": "Which family tradition did you love?", "category": "memory", "childAccess": "guardian_approved" },
+    { "key": "encouragement", "label": "I would like some encouragement", "category": "wisdom", "childAccess": "guardian_approved" },
+    { "key": "life_lesson", "label": "Tell me something life taught you", "category": "wisdom", "childAccess": "guardian_approved" },
+    { "key": "remembrance_message", "label": "Play a message left for remembrance", "category": "memorial", "childAccess": "guardian_approved_sensitive" }
+  ],
+  "playbackDisclosure": "Original recording, not a live conversation or AI-generated speech.",
+  "noRecordingText": "No recording was left for this choice."
+}
